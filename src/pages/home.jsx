@@ -218,7 +218,7 @@ export default function Home() {
   const faqData = [
     { question: "Who can participate?", answer: "Anyone with a passion for technology and healthcare is welcome! This includes students, professionals, designers, developers, and medical experts." },
     { question: "Is there a participation fee?", answer: "No, Serveathon is completely free for all participants." },
-    { question: "What is the team size?", answer: "You can participate solo or in teams of up to 4 members. You can form teams beforehand or find teammates during our team formation session." }
+    { question: "What is the team size?", answer: "You can participate duo or in teams of up to 4 members. You can form teams beforehand or find teammates during our team formation session." }
   ];
 
   const location = useLocation();
@@ -241,7 +241,7 @@ export default function Home() {
           {/* Hero Section */}
           <section id="hero" className="relative text-white py-20 md:py-32 overflow-hidden">
             <div className="relative z-10 container mx-auto px-6 text-center">
-              <h1 className="hero-title text-4xl md:text-6xl font-extrabold mb-4 leading-tight">Serveathon 2025: Health Tech</h1>
+              <h1 className="hero-title text-4xl md:text-6xl font-extrabold mb-4 leading-tight">Serve-a-thon 2025: Health Tech</h1>
               <p className="text-xl md:text-2xl mb-8 font-light text-gray-300">Innovate for a Healthier Future.</p>
               <Countdown />
               <p className="text-lg text-gray-300 mb-8">Until Online Idea Submission Deadline</p>
@@ -254,8 +254,7 @@ export default function Home() {
             <div className="container mx-auto px-6">
               <h2 className="section-title">About Serveathon</h2>
               <p className="section-subtitle">
-                Serveathon is a premier hackathon dedicated to creating technology-driven solutions for the <strong>healthcare and medical domains</strong>. We bring together developers, designers, and visionaries to build projects that make a tangible impact on patient care, medical technology, and wellness. It's more than just a competition; it's a movement to code for a healthier world.
-              </p>
+                Serve-a-thon is a hackathon focused on solving real-world health and social challenges. It brings together innovators to build impactful solutions that improve lives and support community well-being.              </p>
             </div>
           </section>
 
@@ -263,7 +262,7 @@ export default function Home() {
           <section id="themes" className="py-20 relative">
             <div className="container mx-auto px-6">
               <h2 className="section-title">Hackathon Theme</h2>
-              <p className="section-subtitle">Focus your creativity on this critical area.</p>
+              <p className="section-subtitle">"Innovate to Serve – Tech Solutions for Health and Social Impact"</p>
               <div className="max-w-2xl mx-auto">
                 <div className="glass-card p-8 transform hover:-translate-y-2 hover:shadow-red-500/20 flex flex-col md:flex-row items-center gap-8">
                   <div className="text-red-400 flex-shrink-0">
@@ -271,7 +270,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="text-3xl font-bold mb-3 text-white">Healthcare & Wellness</h3>
-                    <p className="text-gray-400">Innovate in areas like medical diagnostics, patient care, mental health, accessibility, and affordable healthcare technology. We are looking for solutions that can revolutionize the medical field and improve the quality of life.</p>
+                    <p className="text-gray-400">Serve-a-thon is a hackathon focused on creating real-world impact through tech. Build innovative, practical solutions that improve healthcare, support mental well-being, enhance safety, or uplift communities. Use your skills to build for a better tomorrow.</p>
                   </div>
                 </div>
               </div>
@@ -286,8 +285,10 @@ export default function Home() {
               <div className="max-w-3xl mx-auto">
                 <div className="relative">
                   <div className="absolute left-1/2 w-0.5 bg-red-500/30 h-full transform -translate-x-1/2"></div>
-                  <div className="mb-8 flex justify-between items-center w-full"><div className="order-1 w-5/12"></div><div className="z-20 flex items-center order-1 bg-red-500 shadow-xl w-12 h-12 rounded-full"><h1 className="mx-auto font-semibold text-lg text-white">1</h1></div><div className="order-1 glass-card w-5/12 px-6 py-4"><p className="text-gray-400 text-sm">August 18, 2025</p><h3 className="font-bold text-white text-xl">Round 1: Idea Submission</h3><p className="text-sm leading-snug tracking-wide text-gray-400">Submit your groundbreaking healthcare ideas online. Teams will be shortlisted based on innovation and feasibility.</p></div></div>
-                  <div className="mb-8 flex justify-between flex-row-reverse items-center w-full"><div className="order-1 w-5/12"></div><div className="z-20 flex items-center order-1 bg-red-500 shadow-xl w-12 h-12 rounded-full"><h1 className="mx-auto text-white font-semibold text-lg">2</h1></div><div className="order-1 glass-card w-5/12 px-6 py-4"><p className="text-gray-400 text-sm">August 22, 2025</p><h3 className="font-bold text-white text-xl">Round 2: Offline Finale</h3><p className="text-sm leading-snug tracking-wide text-gray-400">Shortlisted teams present their ideas and prototypes to judges at the RIT Campus. Time to bring your vision to life!</p></div></div>
+                  <div className="mb-8 flex justify-between items-center w-full"><div className="order-1 w-5/12"></div><div className="z-20 flex items-center order-1 bg-red-500 shadow-xl w-12 h-12 rounded-full"><h1 className="mx-auto font-semibold text-lg text-white">1</h1></div><div className="order-1 glass-card w-5/12 px-6 py-4"><p className="text-gray-400 text-sm">August 18, 2025</p><h3 className="font-bold text-white text-xl">Round 1: Online PPT Submission</h3><p className="text-sm leading-snug tracking-wide text-gray-400">Submit your PowerPoint presentation online, explaining your selected problem statement and solution idea.
+                    Submissions will be evaluated based on relevance, innovation, and feasibility.</p></div></div>
+                  <div className="mb-8 flex justify-between flex-row-reverse items-center w-full"><div className="order-1 w-5/12"></div><div className="z-20 flex items-center order-1 bg-red-500 shadow-xl w-12 h-12 rounded-full"><h1 className="mx-auto text-white font-semibold text-lg">2</h1></div><div className="order-1 glass-card w-5/12 px-6 py-4"><p className="text-gray-400 text-sm">August 22, 2025</p><h3 className="font-bold text-white text-xl">Round 2: Offline Finale</h3><p className="text-sm leading-snug tracking-wide text-gray-400">Top 25 shortlisted teams will be invited to present their problem statement and prototype at RIT Campus.
+                    Get ready to pitch your ideas and bring your vision to life before expert judges!</p></div></div>
                 </div>
               </div>
             </div>
@@ -297,12 +298,8 @@ export default function Home() {
           <section id="prizes" className="py-20 relative">
             <div className="container mx-auto px-6">
               <h2 className="section-title">Prizes & Recognition</h2>
-              <p className="section-subtitle">Win amazing prizes and get recognized for your innovative solutions.</p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div className="glass-card p-8 transform hover:scale-105 transition-transform duration-300"><p className="text-xl font-semibold text-gray-400 mb-2">2nd Place</p><p className="text-4xl font-bold text-white mb-4">$3,000</p><p className="text-gray-400">Plus swag packs and mentorship sessions.</p></div>
-                <div className="p-8 rounded-2xl shadow-2xl transform hover:scale-110 transition-transform duration-300 relative bg-gradient-to-br from-red-600 to-orange-500"><div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white text-red-600 px-4 py-1 rounded-full text-sm font-semibold">TOP PRIZE</div><p className="text-xl font-semibold text-white mt-4 mb-2">1st Place</p><p className="text-5xl font-bold text-white mb-4">$5,000</p><p className="text-red-100">Plus swag packs, mentorship sessions, and a feature on our blog.</p></div>
-                <div className="glass-card p-8 transform hover:scale-105 transition-transform duration-300"><p className="text-xl font-semibold text-gray-400 mb-2">3rd Place</p><p className="text-4xl font-bold text-white mb-4">$1,500</p><p className="text-gray-400">Plus swag packs and mentorship sessions.</p></div>
-              </div>
+              <p className="section-subtitle">All registered participants will be awarded a digital certificate of participation.</p>
+              <h2 className="section-title">The top three teams will receive certificates of excellence along with exciting prizes in recognition of their innovative solutions and impactful ideas.</h2>
             </div>
           </section>
 
