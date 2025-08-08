@@ -278,17 +278,40 @@ export default function Home() {
           </section>
 
           {/* Schedule Section */}
-          <section id="schedule" className="py-20 relative">
+          <section id="schedule" className="py-20 bg-black">
             <div className="container mx-auto px-6">
-              <h2 className="section-title">Event Schedule</h2>
-              <p className="section-subtitle">A two-round event to find the most innovative health-tech solution.</p>
-              <div className="max-w-3xl mx-auto">
-                <div className="relative">
-                  <div className="absolute left-1/2 w-0.5 bg-red-500/30 h-full transform -translate-x-1/2"></div>
-                  <div className="mb-8 flex justify-between items-center w-full"><div className="order-1 w-5/12"></div><div className="z-20 flex items-center order-1 bg-red-500 shadow-xl w-12 h-12 rounded-full"><h1 className="mx-auto font-semibold text-lg text-white">1</h1></div><div className="order-1 glass-card w-5/12 px-6 py-4"><p className="text-gray-400 text-sm">August 18, 2025</p><h3 className="font-bold text-white text-xl">Round 1: Online PPT Submission</h3><p className="text-sm leading-snug tracking-wide text-gray-400">Submit your PowerPoint presentation online, explaining your selected problem statement and solution idea.
-                    Submissions will be evaluated based on relevance, innovation, and feasibility.</p></div></div>
-                  <div className="mb-8 flex justify-between flex-row-reverse items-center w-full"><div className="order-1 w-5/12"></div><div className="z-20 flex items-center order-1 bg-red-500 shadow-xl w-12 h-12 rounded-full"><h1 className="mx-auto text-white font-semibold text-lg">2</h1></div><div className="order-1 glass-card w-5/12 px-6 py-4"><p className="text-gray-400 text-sm">August 22, 2025</p><h3 className="font-bold text-white text-xl">Round 2: Offline Finale</h3><p className="text-sm leading-snug tracking-wide text-gray-400">Top 25 shortlisted teams will be invited to present their problem statement and prototype at RIT Campus.
-                    Get ready to pitch your ideas and bring your vision to life before expert judges!</p></div></div>
+              <h2 className="section-title text-white text-center">Event Schedule</h2>
+              <p className="section-subtitle text-gray-400 text-center mb-12">
+                A two-round event to find the most innovative health-tech solution.
+              </p>
+
+              {/* Round 1 */}
+              <div className="mb-10 flex flex-col items-center">
+                <div className="bg-red-500 shadow-xl w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                  <h1 className="text-white font-semibold text-lg">1</h1>
+                </div>
+                <div className="glass-card w-full max-w-xl px-6 py-4">
+                  <p className="text-gray-400 text-sm mb-1">August 18, 2025</p>
+                  <h3 className="font-bold text-white text-xl mb-2">Round 1: Online PPT Submission</h3>
+                  <p className="text-sm text-gray-400 leading-snug">
+                    Submit your PowerPoint presentation online, explaining your selected problem statement and solution idea.
+                    Submissions will be evaluated based on relevance, innovation, and feasibility.
+                  </p>
+                </div>
+              </div>
+
+              {/* Round 2 */}
+              <div className="flex flex-col items-center">
+                <div className="bg-red-500 shadow-xl w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                  <h1 className="text-white font-semibold text-lg">2</h1>
+                </div>
+                <div className="glass-card w-full max-w-xl px-6 py-4">
+                  <p className="text-gray-400 text-sm mb-1">August 22, 2025</p>
+                  <h3 className="font-bold text-white text-xl mb-2">Round 2: Offline Finale</h3>
+                  <p className="text-sm text-gray-400 leading-snug">
+                    Top 25 shortlisted teams will be invited to present their problem statement and prototype at RIT Campus.
+                    Get ready to pitch your ideas and bring your vision to life before expert judges!
+                  </p>
                 </div>
               </div>
             </div>
