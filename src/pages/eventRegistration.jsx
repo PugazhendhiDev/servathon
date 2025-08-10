@@ -3,6 +3,7 @@ import Select from "react-dropdown-select";
 import { ToastContainer, toast } from 'react-toastify';
 import { HashLoader } from "react-spinners";
 import 'react-toastify/dist/ReactToastify.css';
+import WA_QR from "../assets/WA_QR.png";
 
 const yearOptions = [
   { id: "I", name: "I" },
@@ -136,8 +137,31 @@ function EventRegistration() {
     <>
       <ToastContainer />
       <div className="flex flex-col items-center justify-start px-4 py-10 min-h-screen">
-        <div className="glass-card p-8 w-full max-w-4xl">
-          <h1 className="text-2xl font-bold text-white text-center mb-8">Serve-a-thon Team Registration</h1>
+        <div className="glass-card p-4 w-full max-w-4xl">
+          <h1 className="glass-card p-4 text-2xl font-bold text-white text-center mb-8">Serve-a-thon Team Registration</h1>
+
+          <ul class="glass-card p-4 mb-8 list-disc list-inside space-y-2 text-white">
+            <li>Team Size: 2 to 4 students</li>
+            <li>
+              Two Phases:
+              <ul class="list-decimal list-inside ml-5 space-y-1 mt-1">
+                <li>Phase 1: Submit idea as PPT</li>
+                <li>Phase 2: Selected teams build &amp; present prototype</li>
+              </ul>
+            </li>
+            <li>Theme: Health, Safety &amp; Human Welfare</li>
+            <li>Original Work Only – No copying</li>
+            <li>Submit via Google Form / Drive (as instructed)</li>
+            <li>Judging Criteria: Innovation, Relevance, Execution, Impact, UI</li>
+            <li>
+              Certificates:
+              <ul class="list-disc list-inside ml-5 space-y-1 mt-1">
+                <li>Participation (PPT submitters)</li>
+                <li>Winners &amp; Special Awards for top teams</li>
+              </ul>
+            </li>
+            <li>Be respectful. Misconduct leads to disqualification</li>
+          </ul>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
@@ -222,7 +246,7 @@ function EventRegistration() {
                 <h2 className="text-lg font-semibold text-white mt-8">Team Members</h2>
                 <div className="grid md:grid-cols-3 gap-4">
                   {members.map((member, index) => (
-                    <div key={index} className="space-y-2 bg-red-100 bg-opacity-30 p-4 rounded-xl border border-red-200">
+                    <div key={index} className="glass-card space-y-2 p-4">
                       <h3 className="text-white font-bold mb-2">
                         {index === 0 ? "Leader" : `Member ${index + 1}`}
                       </h3>
@@ -283,14 +307,22 @@ function EventRegistration() {
               </>
             )}
 
-            <button
-              type="submit"
-              disabled={isSubmit}
-              className={`w-full mt-6 py-3 rounded-2xl font-bold text-white ${isSubmit ? "bg-red-300" : "bg-red-700 hover:bg-red-800"} flex justify-center items-center gap-3`}
-            >
-              {isSubmit ? <HashLoader size={20} color="#fff" /> : "Submit Registration"}
-            </button>
+            <div className="w-full flex justify-center mt-6">
+              <button
+                type="submit"
+                disabled={isSubmit}
+                className={`w-60 mt-6 py-3 rounded-2xl font-bold text-white ${isSubmit ? "bg-red-300 cursor-not-allowed" : "bg-red-700 hover:bg-red-800 cursor-pointer"} flex justify-center items-center gap-3`}
+              >
+                {isSubmit ? <HashLoader size={20} color="#fff" /> : "Submit Registration"}
+              </button>
+            </div>
           </form>
+
+          <div className="w-full flex flex-col justify-center items-center gap-6">
+            <a className="w-60 mt-6 py-3 rounded-2xl font-bold text-white bg-gray-500 hover:bg-gray-700 cursor-pointer flex justify-center items-center gap-3" href="https://chat.whatsapp.com/Fu7ojrWR78f4b8cPXGGZd9?mode=ac_t">Click to join Whatsapp group</a>
+            <p className="w-full text-white flex justify-center">OR SCAN THE QR</p>
+            <img className="w-full max-w-64 rounded-2xl" src={WA_QR} />
+          </div>
         </div>
       </div>
     </>
