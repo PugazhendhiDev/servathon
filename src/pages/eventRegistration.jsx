@@ -17,11 +17,17 @@ const teamSizeOptions = [
   { id: "4", name: "4" },
 ];
 
+const collegeOptions = [
+  { id: "Rajalakshmi Institute of Technology", name: "Rajalakshmi Institute of Technology" },
+  { id: "Other", name: "Other" }
+];
+
 function EventRegistration() {
   const [formData, setFormData] = useState({
     teamName: "",
     collegeName: "",
     teamSize: "",
+    collegeType: ""
   });
 
   const [members, setMembers] = useState([]);
@@ -45,8 +51,11 @@ function EventRegistration() {
         toast.error(`Please complete all fields for ${i === 0 ? "Leader" : `Member ${i + 1}`}`);
         return false;
       }
+      if (formData.collegeType === "Rajalakshmi Institute of Technology" && !member.rollNo) {
+        toast.error(`Please enter roll number for ${i === 0 ? "Leader" : `Member ${i + 1}`}`);
+        return false;
+      }
       if (i === 0) {
-        // Leader needs phone & email
         if (!member.phone || !/^\d{10}$/.test(member.phone)) {
           toast.error("Leader's phone number must be 10 digits.");
           return false;
@@ -84,12 +93,14 @@ function EventRegistration() {
           acc["leaderName"] = member.name;
           acc["leaderYear"] = member.year;
           acc["leaderDept"] = member.dept;
-          acc[`leaderPhone`] = member.phone;
-          acc[`leaderEmail`] = member.email;
+          acc["leaderPhone"] = member.phone;
+          acc["leaderEmail"] = member.email;
+          if (formData.collegeType === "Rajalakshmi Institute of Technology") acc["leaderRollNo"] = member.rollNo;
         } else {
-          acc[`memberName${i + 1}`] = member.name;
-          acc[`memberYear${i + 1}`] = member.year;
-          acc[`memberDept${i + 1}`] = member.dept;
+          acc[`member${i + 1}Name`] = member.name;
+          acc[`member${i + 1}Year`] = member.year;
+          acc[`member${i + 1}Dept`] = member.dept;
+          if (formData.collegeType === "Rajalakshmi Institute of Technology") acc[`member${i + 1}RollNo`] = member.rollNo;
         }
         return acc;
       }, {});
@@ -109,7 +120,7 @@ function EventRegistration() {
 
       if (response.ok) {
         toast.success("Registration submitted successfully!");
-        setFormData({ teamName: "", collegeName: "", teamSize: "" });
+        setFormData({ teamName: "", collegeName: "", teamSize: "", collegeType: "" });
         setMembers([]);
       } else {
         toast.error("Failed to submit. Try again later.");
@@ -125,31 +136,61 @@ function EventRegistration() {
     <>
       <ToastContainer />
       <div className="flex flex-col items-center justify-start px-4 py-10 min-h-screen">
-        <div className="glass-card p-8 w-full max-w-4xl transform hover:-translate-y-2 hover:shadow-red-500/20">
+        <div className="glass-card p-8 w-full max-w-4xl">
           <h1 className="text-2xl font-bold text-white text-center mb-8">Serve-a-thon Team Registration</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
-              {[
-                { label: "Team Name", name: "teamName" },
-                { label: "College Name", name: "collegeName" },
-              ].map(({ label, name }) => (
-                <div key={name}>
-                  <label className="font-semibold text-white">{label}</label>
+              <div>
+                <label className="font-semibold text-white">Team Name</label>
+                <input
+                  name="teamName"
+                  type="text"
+                  value={formData.teamName}
+                  onChange={handleChange}
+                  className="w-full mt-1 rounded-xl border-2 border-red-200 px-4 py-2"
+                  placeholder="Enter team name"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="font-semibold text-white">College</label>
+                <Select
+                  options={collegeOptions}
+                  labelField="name"
+                  valueField="id"
+                  values={formData.collegeType ? [{ id: formData.collegeType, name: formData.collegeType }] : []}
+                  onChange={(values) => {
+                    const selected = values[0]?.id || "";
+                    setFormData((prev) => ({
+                      ...prev,
+                      collegeType: selected,
+                      collegeName: selected === "Rajalakshmi Institute of Technology" ? "Rajalakshmi Institute of Technology" : ""
+                    }));
+                  }}
+                  placeholder="Select college"
+                  style={{ border: "2px solid #fecaca", borderRadius: "10px", padding: "10px", backgroundColor: "#fff" }}
+                />
+              </div>
+
+              {formData.collegeType === "Other" && (
+                <div>
+                  <label className="font-semibold text-white">College Name</label>
                   <input
-                    name={name}
+                    name="collegeName"
                     type="text"
-                    value={formData[name]}
+                    value={formData.collegeName}
                     onChange={handleChange}
-                    className="w-full mt-1 rounded-xl border-2 border-red-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
-                    placeholder={`Enter ${label.toLowerCase()}`}
+                    className="w-full mt-1 rounded-xl border-2 border-red-200 px-4 py-2"
+                    placeholder="Enter college name"
                     required
                   />
                 </div>
-              ))}
+              )}
 
               <div>
-                <label className="font-semibold text-white">Number of Team Members (including Leader)</label>
+                <label className="font-semibold text-white">Number of Team Members</label>
                 <Select
                   options={teamSizeOptions}
                   labelField="name"
@@ -165,7 +206,8 @@ function EventRegistration() {
                       year: "",
                       dept: "",
                       phone: "",
-                      email: ""
+                      email: "",
+                      rollNo: ""
                     }));
                     setMembers(newMembers);
                   }}
@@ -207,6 +249,15 @@ function EventRegistration() {
                         placeholder="Department"
                         required
                       />
+                      {formData.collegeType === "Rajalakshmi Institute of Technology" && (
+                        <input
+                          value={member.rollNo}
+                          onChange={(e) => handleMemberChange(index, "rollNo", e.target.value)}
+                          className="w-full rounded-xl border-2 border-red-200 px-4 py-2"
+                          placeholder="Roll Number"
+                          required
+                        />
+                      )}
                       {index === 0 && (
                         <>
                           <input
