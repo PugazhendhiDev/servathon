@@ -16,6 +16,7 @@ const Navbar = () => {
         section.scrollIntoView({ behavior: "smooth" });
       }
     }
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -47,6 +48,7 @@ const Navbar = () => {
           <Link
             to="/event-registration"
             className="block mt-2 bg-red-600 text-white text-center px-5 py-2 rounded-full hover:bg-red-700 transition"
+            onClick={() => setMobileMenuOpen(false)}
           >
             Register Now
           </Link>

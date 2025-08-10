@@ -10,7 +10,7 @@ function Footer() {
                 </a>
                 <p className="my-4 text-gray-400">Innovate. Collaborate. Serve the Community.</p>
                 <div className="flex justify-center space-x-6 mt-6">
-                    <a href="#" className="text-gray-400 hover:text-red-400 transition">Twitter</a>
+                    <a href="https://www.instagram.com/ritchennai/" className="text-gray-400 hover:text-red-400 transition">RIT Instagram</a>
                     <a href="https://www.linkedin.com/company/youth-red-cross-rit/" className="text-gray-400 hover:text-red-400 transition">LinkedIn</a>
                     <a href="https://www.instagram.com/rit._.yrc/" className="text-gray-400 hover:text-red-400 transition">Instagram</a>
                 </div>

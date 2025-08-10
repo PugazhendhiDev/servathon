@@ -12,20 +12,15 @@ const yearOptions = [
 ];
 
 const teamSizeOptions = [
-  { id: "1", name: "1" },
   { id: "2", name: "2" },
   { id: "3", name: "3" },
+  { id: "4", name: "4" },
 ];
 
 function EventRegistration() {
   const [formData, setFormData] = useState({
     teamName: "",
     collegeName: "",
-    leaderName: "",
-    phone: "",
-    email: "",
-    leaderYear: "",
-    leaderDept: "",
     teamSize: "",
   });
 
@@ -47,8 +42,20 @@ function EventRegistration() {
     for (let i = 0; i < members.length; i++) {
       const member = members[i];
       if (!member.name || !member.year || !member.dept) {
-        toast.error(`Please complete all fields for Member ${i + 1}`);
+        toast.error(`Please complete all fields for ${i === 0 ? "Leader" : `Member ${i + 1}`}`);
         return false;
+      }
+      if (i === 0) {
+        // Leader needs phone & email
+        if (!member.phone || !/^\d{10}$/.test(member.phone)) {
+          toast.error("Leader's phone number must be 10 digits.");
+          return false;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(member.email)) {
+          toast.error("Enter a valid leader email address.");
+          return false;
+        }
       }
     }
     return true;
@@ -57,39 +64,33 @@ function EventRegistration() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!formData.teamName || !formData.leaderName || !formData.phone || !formData.email || !formData.collegeName) {
+    if (!formData.teamName || !formData.collegeName) {
       toast.error("Please fill all required fields.");
       return;
     }
 
-    if (!emailRegex.test(formData.email)) {
-      toast.error("Enter a valid email address.");
+    if (members.length < 2 || members.length > 4) {
+      toast.error("Team must have between 2 and 4 members (including leader).");
       return;
     }
 
-    if (formData.phone.length !== 10 || !/^\d{10}$/.test(formData.phone)) {
-      toast.error("Phone number must be 10 digits.");
-      return;
-    }
-
-    if (members.length < 1 || members.length > 3) {
-      toast.error("Team must have 1 to 3 members (excluding leader).");
-      return;
-    }
-
-    if (!validateMembers()) {
-      return;
-    }
+    if (!validateMembers()) return;
 
     try {
       setIsSubmit(true);
 
       const memberData = members.reduce((acc, member, i) => {
-        acc[`memberName${i + 1}`] = member.name;
-        acc[`memberYear${i + 1}`] = member.year;
-        acc[`memberDept${i + 1}`] = member.dept;
+        if (i === 0) {
+          acc["leaderName"] = member.name;
+          acc["leaderYear"] = member.year;
+          acc["leaderDept"] = member.dept;
+          acc[`leaderPhone`] = member.phone;
+          acc[`leaderEmail`] = member.email;
+        } else {
+          acc[`memberName${i + 1}`] = member.name;
+          acc[`memberYear${i + 1}`] = member.year;
+          acc[`memberDept${i + 1}`] = member.dept;
+        }
         return acc;
       }, {});
 
@@ -108,16 +109,7 @@ function EventRegistration() {
 
       if (response.ok) {
         toast.success("Registration submitted successfully!");
-        setFormData({
-          teamName: "",
-          collegeName: "",
-          leaderName: "",
-          phone: "",
-          email: "",
-          leaderYear: "",
-          leaderDept: "",
-          teamSize: "",
-        });
+        setFormData({ teamName: "", collegeName: "", teamSize: "" });
         setMembers([]);
       } else {
         toast.error("Failed to submit. Try again later.");
@@ -133,24 +125,20 @@ function EventRegistration() {
     <>
       <ToastContainer />
       <div className="flex flex-col items-center justify-start px-4 py-10 min-h-screen">
-        <div className="bg-red-50 bg-opacity-80 rounded-2xl p-8 max-w-5xl w-full shadow-md">
-          <h1 className="text-2xl font-bold text-red-700 text-center mb-8">Event Team Registration</h1>
+        <div className="glass-card p-8 w-full max-w-4xl transform hover:-translate-y-2 hover:shadow-red-500/20">
+          <h1 className="text-2xl font-bold text-white text-center mb-8">Serve-a-thon Team Registration</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
               {[
                 { label: "Team Name", name: "teamName" },
                 { label: "College Name", name: "collegeName" },
-                { label: "Name (Leader)", name: "leaderName" },
-                { label: "Dept (Leader)", name: "leaderDept" },
-                { label: "Phone (Leader)", name: "phone" },
-                { label: "Email (Leader)", name: "email", type: "email" },
-              ].map(({ label, name, type }) => (
+              ].map(({ label, name }) => (
                 <div key={name}>
-                  <label className="font-semibold">{label}</label>
+                  <label className="font-semibold text-white">{label}</label>
                   <input
                     name={name}
-                    type={type || "text"}
+                    type="text"
                     value={formData[name]}
                     onChange={handleChange}
                     className="w-full mt-1 rounded-xl border-2 border-red-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
@@ -161,22 +149,7 @@ function EventRegistration() {
               ))}
 
               <div>
-                <label className="font-semibold">Year (Leader)</label>
-                <Select
-                  options={yearOptions}
-                  labelField="name"
-                  valueField="id"
-                  values={formData.leaderYear ? [{ id: formData.leaderYear, name: formData.leaderYear }] : []}
-                  onChange={(values) => {
-                    setFormData({ ...formData, leaderYear: values[0]?.id || "" });
-                  }}
-                  placeholder="Select leader year"
-                  style={{ border: "2px solid #fecaca", borderRadius: "10px", padding: "10px", backgroundColor: "#fff" }}
-                />
-              </div>
-
-              <div>
-                <label className="font-semibold">Number of Team Members (excluding Leader)</label>
+                <label className="font-semibold text-white">Number of Team Members (including Leader)</label>
                 <Select
                   options={teamSizeOptions}
                   labelField="name"
@@ -191,10 +164,12 @@ function EventRegistration() {
                       name: "",
                       year: "",
                       dept: "",
+                      phone: "",
+                      email: ""
                     }));
                     setMembers(newMembers);
                   }}
-                  placeholder="Select number of members"
+                  placeholder="Select team size"
                   style={{ border: "2px solid #fecaca", borderRadius: "10px", padding: "10px", backgroundColor: "#fff" }}
                 />
               </div>
@@ -202,19 +177,20 @@ function EventRegistration() {
 
             {members.length > 0 && (
               <>
-                <h2 className="text-lg font-semibold text-red-700 mt-8">Team Members</h2>
+                <h2 className="text-lg font-semibold text-white mt-8">Team Members</h2>
                 <div className="grid md:grid-cols-3 gap-4">
                   {members.map((member, index) => (
                     <div key={index} className="space-y-2 bg-red-100 bg-opacity-30 p-4 rounded-xl border border-red-200">
-                      <label className="font-semibold">Member {index + 1} Name</label>
+                      <h3 className="text-white font-bold mb-2">
+                        {index === 0 ? "Leader" : `Member ${index + 1}`}
+                      </h3>
                       <input
                         value={member.name}
                         onChange={(e) => handleMemberChange(index, "name", e.target.value)}
                         className="w-full rounded-xl border-2 border-red-200 px-4 py-2"
-                        placeholder="Member name"
+                        placeholder="Full name"
                         required
                       />
-                      <label className="font-semibold">Year</label>
                       <Select
                         options={yearOptions}
                         labelField="name"
@@ -224,7 +200,6 @@ function EventRegistration() {
                         placeholder="Select year"
                         style={{ border: "2px solid #fecaca", borderRadius: "10px", padding: "10px", backgroundColor: "#fff" }}
                       />
-                      <label className="font-semibold">Dept</label>
                       <input
                         value={member.dept}
                         onChange={(e) => handleMemberChange(index, "dept", e.target.value)}
@@ -232,6 +207,25 @@ function EventRegistration() {
                         placeholder="Department"
                         required
                       />
+                      {index === 0 && (
+                        <>
+                          <input
+                            value={member.phone}
+                            onChange={(e) => handleMemberChange(index, "phone", e.target.value)}
+                            className="w-full rounded-xl border-2 border-red-200 px-4 py-2"
+                            placeholder="Leader phone"
+                            required
+                          />
+                          <input
+                            value={member.email}
+                            onChange={(e) => handleMemberChange(index, "email", e.target.value)}
+                            className="w-full rounded-xl border-2 border-red-200 px-4 py-2"
+                            placeholder="Leader email"
+                            type="email"
+                            required
+                          />
+                        </>
+                      )}
                     </div>
                   ))}
                 </div>
