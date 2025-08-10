@@ -146,7 +146,7 @@ function EventRegistration() {
             <h1 className="text-2xl font-bold text-white">Registration</h1>
           </div>
 
-          <h2 class="text-xl font-semibold mb-4 text-center md:text-left text-white">📌 Judging Criteria</h2>
+          <h2 class="text-xl font-semibold mb-4 text-left text-white">📌 Judging Criteria</h2>
           <ul class="glass-card p-4 mb-8 list-disc list-inside space-y-2 text-white">
             <li><strong>Innovation</strong> – Originality of the idea</li>
             <li><strong>Relevance</strong> – Fit to health, safety, or welfare goals</li>
@@ -155,13 +155,13 @@ function EventRegistration() {
             <li><strong>UI</strong> – User experience &amp; design quality</li>
           </ul>
 
-          <h2 class="text-xl font-semibold mb-4 text-center md:text-left text-white">🏆 Certificates & Awards</h2>
+          <h2 class="text-xl font-semibold mb-4 text-left text-white">🏆 Certificates & Awards</h2>
           <ul class="glass-card p-4 mb-8 list-disc list-inside space-y-2 text-white">
             <li><strong>Participation Certificate</strong> – For all PPT submitters</li>
             <li><strong>Winner &amp; Special Awards</strong> – For top-performing teams</li>
           </ul>
 
-          <h2 class="text-xl font-semibold mb-4 text-center md:text-left text-white">⚠ Rules</h2>
+          <h2 class="text-xl font-semibold mb-4 text-left text-white">⚠ Rules</h2>
           <ul class="glass-card p-4 mb-8 list-disc list-inside space-y-2 text-white">
             <li>Be respectful &amp; collaborative</li>
             <li>Any form of misconduct will lead to disqualification</li>
